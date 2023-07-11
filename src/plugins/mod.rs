@@ -28,7 +28,7 @@ fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, query: Query<&Na
 impl Plugin for PeoplePlugin {
     fn build(&self, _app: &mut App) {
         _app.insert_resource(GreetTimer(Timer::from_seconds(2.0, TimerMode::Repeating)))
-            .add_startup_system(add_people)
-            .add_system(greet_people);
+            .add_systems(Startup, add_people)
+            .add_systems(Update, greet_people);
     }
 }
